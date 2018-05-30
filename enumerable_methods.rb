@@ -20,6 +20,17 @@ module Enumerable
     end
     return new_arr
   end
+
+  def my_all?
+    self.my_each do |value|
+      if !yield(value)
+        return false
+      end
+    end
+    return true
+  end
+
+  
 end
 
 # Testing below
@@ -37,5 +48,10 @@ puts "Testing my_select"
 evenNumbers = [1,2,3,4,5,6,7,8].my_select do |value|
   value % 2 == 0
 end
-
 puts evenNumbers
+
+puts "Testing my_all?"
+result = [1,1,1,1].my_all? do |value|
+  value == 1
+end
+puts result
