@@ -81,18 +81,18 @@ module Enumerable
   end
 
   def my_inject(x)
+    # Following:
+    # http://blog.jayfields.com/2008/03/ruby-inject.html
     result = x
     stored = 0
     first_time = true
     self.each do |value|
-
       if first_time
         stored = yield(result, value)
         first_time = false
       else
         stored = yield(stored, value)
       end
-
     end
     return stored
   end
