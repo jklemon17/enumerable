@@ -1,5 +1,7 @@
 module Enumerable
   def my_each
-    #My code here
+    for i in 0...self.length do
+      puts self[i]
+    end
   end
 end
