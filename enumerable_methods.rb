@@ -72,6 +72,22 @@ module Enumerable
     end
   end
 
+  def my_map_proc_block(&proc)
+    if proc
+      new_arr = []
+      self.my_each do |value|
+        new_arr.push(proc.call(value))
+      end
+      return new_arr
+    elsif block_given?
+      new_arr = []
+      self.my_each do |value|
+        new_arr.push(yield(value))
+      end
+      return new_arr
+    end
+  end
+
   def my_map_proc(&proc)
     new_arr = []
     self.my_each do |value|
@@ -164,3 +180,7 @@ puts multiply_els([2, 4, 5])
 puts "Testing my_map with proc"
 new_proc = Proc.new {|x| x**2}
 puts [2,4,6].my_map_proc(&new_proc)
+
+puts "Testing my_map_proc_block (proc first, block second)"
+puts [2,4,6].my_map_proc_block(&new_proc)
+puts [2,4,6].my_map_proc_block {|x| x**2}
