@@ -30,7 +30,14 @@ module Enumerable
     return true
   end
 
-  
+  def my_any?
+    self.my_each do |value|
+      if yield(value)
+        return true
+      end
+    end
+    return false
+  end
 end
 
 # Testing below
@@ -52,6 +59,12 @@ puts evenNumbers
 
 puts "Testing my_all?"
 result = [1,1,1,1].my_all? do |value|
+  value == 1
+end
+puts result
+
+puts "Testing my_any?"
+result = [2,2,2,2].my_any? do |value|
   value == 1
 end
 puts result
