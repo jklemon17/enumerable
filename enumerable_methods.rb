@@ -79,6 +79,23 @@ module Enumerable
     end
     return new_arr
   end
+
+  def my_inject(x)
+    result = x
+    stored = 0
+    first_time = true
+    self.each do |value|
+
+      if first_time
+        stored = yield(result, value)
+        first_time = false
+      else
+        stored = yield(stored, value)
+      end
+
+    end
+    return stored
+  end
 end
 
 # Testing below
@@ -122,3 +139,7 @@ puts [1,2,3,2,2,3,3,3].my_count {|value| value == 3}
 
 puts "Testing my_map"
 puts [2,4,6].my_map {|x| x**2}
+
+puts "Testing my_inject"
+puts [1, 2, 3, 4].my_inject(2) { |result, element| result + element }
+puts [1, 2, 3, 4].inject(2) { |result, element| result + element }
