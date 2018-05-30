@@ -72,7 +72,13 @@ module Enumerable
     end
   end
 
-  def my_map()
+  def my_map
+    new_arr = []
+    self.my_each do |value|
+      new_arr.push(yield(value))
+    end
+    return new_arr
+  end
 end
 
 # Testing below
@@ -113,3 +119,6 @@ puts result
 puts "Testing my_count"
 puts [1,2,3,2,2,3,3,3].my_count(5)
 puts [1,2,3,2,2,3,3,3].my_count {|value| value == 3}
+
+puts "Testing my_map"
+puts [2,4,6].my_map {|x| x**2}
